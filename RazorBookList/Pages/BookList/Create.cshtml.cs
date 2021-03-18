@@ -17,10 +17,27 @@ namespace RazorBookList.Pages.BookList
         {
             _db = db;
         }
-
+        // Property Binding, ele automaticamente assume que no post voce vai estar pegando o Book
+        [BindProperty]
         public Book Book { get; set; }
         public void OnGet()
         {
+
+        }
+
+        // ActionResult para redirecionar como resultado de uma ação
+        public async Task<IActionResult> OnPost()
+        {
+            if (ModelState.IsValid)
+            {
+                await _db.Book.AddAsync(Book);
+                await _db.SaveChangesAsync(); //Jogar os dados no banco
+                return RedirectToPage("Index");
+            }
+            else
+            {
+                return Page();
+            }
         }
     }
 }
