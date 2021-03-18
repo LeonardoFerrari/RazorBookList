@@ -38,3 +38,28 @@ function loadDataTable() {
     });
 }
 
+
+function Delete(url) {
+    swal({
+        title: "Você tem certeza que deseja excluir esse livro?",
+        text: "Uma vez deletado, o item não poderá ser recuperado",
+        icon: "warning",
+        dangerMode: true
+    }).then((willDelete) => {
+        if (willDelete) { // Ou seja, se o usuário realmente desejar excluir o item
+            $.ajax({
+                type: "DELETE",
+                url: url,
+                success: function (data) {
+                    if (data.success) {
+                        toastr.success(data.message);
+                        dataTable.ajax.reload();
+                    }
+                    else {
+                        toastr.error(message);
+                    }
+                }
+            });
+        }
+    });
+}
