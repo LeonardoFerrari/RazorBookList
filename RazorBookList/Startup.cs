@@ -27,6 +27,7 @@ namespace RazorBookList
         {
             // Adicionando o dbcontext ao pipeline, feito isso voce pode usar ele e o dependency injection
             services.AddDbContext<ApplicationDbContext>(option => option.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            services.AddControllersWithViews(); // Adiciona as chamadas API
             services.AddRazorPages().AddRazorRuntimeCompilation();
         }
 
@@ -53,6 +54,7 @@ namespace RazorBookList
 
             app.UseEndpoints(endpoints =>
             {
+                endpoints.MapControllers();
                 endpoints.MapRazorPages();
             });
         }
