@@ -1,0 +1,63 @@
+﻿@page
+@model RazorBookList.Pages.BookList.IndexModel
+
+
+<br />
+<div class="container row p-0 m-0">
+    <div class="col-9">
+        <h2 class="text-info">Lista de livros</h2>
+    </div>
+    <!-- Bootstrap, divide a linha em 12 colunas iguais-->
+    <div class="col-3">
+        <a asp-page ="Create" class="btn btn-info form-control text-white">Adicionar novo livro</a>
+    </div>
+
+
+    <div class="col-12 border p-3 mt-3">
+        <form method="post">
+            @if (Model.Books.Count() > 0)
+            {         // Usar o @ para poder usar a sintaxe do C#. Verificar se existe livro
+                <table class="table table-striped border">
+                    <tr class="table-secondary">
+                        <th>
+                            <label asp-for="Books.FirstOrDefault().Name"></label> <!-- Usando o tag helper asp-for -->
+                        </th>
+                        <th>
+                            @*Html.DisplayNameFor(m => m.Books.FirstOrDefault().Author)*@  <!-- Usando o HTML helper ao invés do tag helper -->
+                            <label asp-for="Books.FirstOrDefault().Author"></label>
+                        </th>
+                        <th>
+                            <label asp-for="Books.FirstOrDefault().ISBN"></label>
+                        </th>
+                        <th>
+
+                        </th>
+                    </tr>
+                    @foreach (var item in Model.Books)
+                    {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(m => item.Name) <!-- Deve-se usar lambda para fazer a refência à instância. Usando html helper pois não equivalente no tag helper -->
+                    </td>
+                    <td>
+                        @Html.DisplayFor(m => item.Author)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(m => item.ISBN)
+                    </td>
+                    <td>
+                        <button class="btn btn-danger btn-sm">Excluir</button>
+                        <a class="btn btn-success btn-sm text-white">Editar</a>
+                    </td>
+                </tr>
+                    }
+                </table>
+            }
+            else
+            {
+                <p>Nenhum livro disponível</p>
+            }
+
+        </form>
+    </div>
+</div>
