@@ -40,7 +40,7 @@ function loadDataTable() {
 
 
 function Delete(url) {
-    swal({
+    swal.fire({
         title: "Você tem certeza que deseja excluir esse livro?",
         text: "Uma vez deletado, o item não poderá ser recuperado",
         icon: "warning",
