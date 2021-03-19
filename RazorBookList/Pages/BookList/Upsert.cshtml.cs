@@ -45,8 +45,13 @@ namespace RazorBookList.Pages.BookList
             {
                 if (Book.Id == 0)
                 {
-                    _db.Book.Update(Book); // O update é usado para dar um update em toda propriedade do item
+                    _db.Book.Add(Book);// O update é usado para dar um update em toda propriedade do item
                 }
+                else
+                {
+                    _db.Book.Update(Book);
+                }
+
                 await _db.SaveChangesAsync();
 
                 return RedirectToPage("Index");
